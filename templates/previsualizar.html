@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Previsualización de Factura</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      padding: 20px;
+    }
+    .container {
+      max-width: 850px;
+      margin: auto;
+      background: #fff;
+      padding: 25px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    }
+    h2 {
+      text-align: center;
+      color: #333;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+    th, td {
+      padding: 10px;
+      border: 1px solid #ccc;
+      text-align: left;
+    }
+    .buttons {
+      margin-top: 30px;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+    }
+    .buttons form {
+      display: inline;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .back {
+      background-color: #ffc107;
+    }
+    .submit {
+      background-color: #28a745;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Previsualización de Factura</h2>
+    <table>
+      <tr><th>Nombre o Razón Social</th><td>{{ legal_name }}</td></tr>
+      <tr><th>RFC</th><td>{{ tax_id }}</td></tr>
+      <tr><th>Código Postal</th><td>{{ postal_code }}</td></tr>
+      <tr><th>Régimen Fiscal</th><td>{{ regimen_fiscal }}</td></tr>
+      <tr><th>Uso del CFDI</th><td>{{ cfdi_use }}</td></tr>
+      <tr><th>Forma de Pago</th><td>{{ forma_pago }}</td></tr>
+      <tr><th>Moneda</th><td>{{ moneda }}</td></tr>
+      <tr><th>Tipo de Cambio</th><td>{{ tipo_cambio }}</td></tr>
+      <tr><th>Producto o Servicio</th><td>{{ description }}</td></tr>
+      <tr><th>Precio Unitario</th><td>${{ price }}</td></tr>
+      <tr><th>Cantidad</th><td>{{ quantity }}</td></tr>
+      <tr><th>Fecha</th><td>{{ fecha_emision }}</td></tr>
+      <tr><th>Hora</th><td>{{ hora_emision }}</td></tr>
+    </table>
+
+    {% if impuestos %}
+    <h3 style="margin-top: 30px;">Impuestos</h3>
+    <table>
+      <tr>
+        <th>Tipo</th>
+        <th>Tasa</th>
+        <th>¿Retenido?</th>
+      </tr>
+      {% for imp in impuestos %}
+      <tr>
+        <td>{{ imp.type }}</td>
+        <td>{{ imp.rate }}%</td>
+        <td>{{ "Sí" if imp.withholding else "No" }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+    {% endif %}
+
+    <div class="buttons">
+      <form action="/" method="get">
+        <button class="back">Editar / Volver</button>
+      </form>
+      <form action="/generar_factura" method="post">
+        {% for key, value in datos_form.items() %}
+          <input type="hidden" name="{{ key }}" value="{{ value }}">
+        {% endfor %}
+        <button class="submit">Generar Factura</button>
+      </form>
+    </div>
+  </div>
+</body>
+</html>
+
+
+
