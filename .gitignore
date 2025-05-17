@@ -1,0 +1,27 @@
+# ✅ Claves y variables de entorno (NO deben subirse a GitHub)
+.env
+.env.*
+
+# ✅ Archivos temporales de Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# ✅ Archivos y carpetas del entorno virtual (si usas venv)
+venv/
+ENV/
+env/
+.venv/
+
+# ✅ Archivos innecesarios de logs o bases locales
+*.log
+*.sqlite3
+*.db
+
+# ✅ Archivos ocultos de Mac
+.DS_Store
+
+# ✅ Archivos de configuración del editor
+.vscode/
+.idea/
