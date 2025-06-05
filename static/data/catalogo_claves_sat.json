@@ -1,0 +1,42 @@
+[
+  {
+    "clave": "84111506",
+    "descripcion": "Servicios de contabilidad"
+  },
+  {
+    "clave": "85121811",
+    "descripcion": "Honorarios médicos"
+  },
+  {
+    "clave": "80141607",
+    "descripcion": "Consultoría en informática"
+  },
+  {
+    "clave": "43211503",
+    "descripcion": "Computadora portátil"
+  },
+  {
+    "clave": "43212105",
+    "descripcion": "Software de contabilidad"
+  },
+  {
+    "clave": "72151501",
+    "descripcion": "Servicios de limpieza"
+  },
+  {
+    "clave": "93141501",
+    "descripcion": "Asesoría legal"
+  },
+  {
+    "clave": "92101501",
+    "descripcion": "Educación profesional"
+  },
+  {
+    "clave": "90111601",
+    "descripcion": "Diseño gráfico"
+  },
+  {
+    "clave": "93161801",
+    "descripcion": "Publicidad"
+  }
+]

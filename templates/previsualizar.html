@@ -65,7 +65,25 @@
       <tr><th>Código Postal</th><td>{{ postal_code }}</td></tr>
       <tr><th>Régimen Fiscal</th><td>{{ regimen_fiscal }}</td></tr>
       <tr><th>Uso del CFDI</th><td>{{ cfdi_use }}</td></tr>
+      <tr><th>Tipo de Comprobante</th>
+        <td>
+          {% if tipo_cfdi == 'I' %}Ingreso
+          {% elif tipo_cfdi == 'E' %}Egreso
+          {% elif tipo_cfdi == 'T' %}Traslado
+          {% elif tipo_cfdi == 'P' %}Pago
+          {% else %}{{ tipo_cfdi }}
+          {% endif %}
+        </td>
+      </tr>
       <tr><th>Forma de Pago</th><td>{{ forma_pago }}</td></tr>
+      <tr><th>Método de Pago</th>
+        <td>
+          {% if metodo_pago == 'PUE' %}Pago en una sola exhibición
+          {% elif metodo_pago == 'PPD' %}Pago en parcialidades o diferido
+          {% else %}{{ metodo_pago }}
+          {% endif %}
+        </td>
+      </tr>
       <tr><th>Moneda</th><td>{{ moneda }}</td></tr>
       <tr><th>Tipo de Cambio</th><td>{{ tipo_cambio }}</td></tr>
       <tr><th>Producto o Servicio</th><td>{{ description }}</td></tr>
@@ -107,6 +125,3 @@
   </div>
 </body>
 </html>
-
-
-

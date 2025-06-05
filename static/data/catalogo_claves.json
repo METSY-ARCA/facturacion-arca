@@ -1,0 +1,32 @@
+[
+  {
+    "clave": "85121600",
+    "descripcion": "Servicios profesionales médicos",
+    "unidad": "E48"
+  },
+  {
+    "clave": "83101500",
+    "descripcion": "Servicios de consultoría",
+    "unidad": "E48"
+  },
+  {
+    "clave": "31161501",
+    "descripcion": "Piezas metálicas",
+    "unidad": "H87"
+  },
+  {
+    "clave": "26101701",
+    "descripcion": "Refacciones de maquinaria",
+    "unidad": "H87"
+  },
+  {
+    "clave": "72101500",
+    "descripcion": "Servicios de mantenimiento",
+    "unidad": "E48"
+  },
+  {
+    "clave": "50171810",
+    "descripcion": "Venta de alimentos",
+    "unidad": "H87"
+  }
+]

@@ -1,0 +1,17 @@
+[
+  {
+    "clave": "84111506",
+    "unidad": "E48",
+    "descripcion": "Servicios de contabilidad"
+  },
+  {
+    "clave": "85121811",
+    "unidad": "E48",
+    "descripcion": "Consultoría legal"
+  },
+  {
+    "clave": "90101500",
+    "unidad": "E48",
+    "descripcion": "Servicios de desarrollo de software"
+  }
+]

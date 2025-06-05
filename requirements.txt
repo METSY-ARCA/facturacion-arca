@@ -1,5 +1,6 @@
-flask
-requests
+Flask
+requests==2.32.3
 gunicorn
 python-dotenv==1.1.0
+waitress
 

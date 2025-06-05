@@ -1,0 +1,17 @@
+[
+  {
+    "clave": "51161500",
+    "descripcion": "Libros electrónicos",
+    "unidad": "E48"
+  },
+  {
+    "clave": "86101501",
+    "descripcion": "Consultas médicas generales",
+    "unidad": "E48"
+  },
+  {
+    "clave": "72151501",
+    "descripcion": "Renta de maquinaria pesada",
+    "unidad": "E48"
+  }
+]

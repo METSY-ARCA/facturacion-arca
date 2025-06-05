@@ -1,0 +1,107 @@
+[
+  {
+    "clave": "84111506",
+    "descripcion": "Servicios de contabilidad",
+    "unidad": "E48"
+  },
+  {
+    "clave": "84111600",
+    "descripcion": "Servicios legales",
+    "unidad": "E48"
+  },
+  {
+    "clave": "84111800",
+    "descripcion": "Servicios de auditoría",
+    "unidad": "E48"
+  },
+  {
+    "clave": "81111504",
+    "descripcion": "Servicios de programación de software",
+    "unidad": "E48"
+  },
+  {
+    "clave": "84131500",
+    "descripcion": "Servicios de consultoría administrativa",
+    "unidad": "E48"
+  },
+  {
+    "clave": "93141501",
+    "descripcion": "Servicios de formación profesional",
+    "unidad": "E48"
+  },
+  {
+    "clave": "93141504",
+    "descripcion": "Cursos de capacitación técnica",
+    "unidad": "E48"
+  },
+  {
+    "clave": "92121500",
+    "descripcion": "Servicios de enseñanza",
+    "unidad": "E48"
+  },
+  {
+    "clave": "31151804",
+    "descripcion": "Piezas metálicas para soldadura industrial",
+    "unidad": "H87"
+  },
+  {
+    "clave": "44121612",
+    "descripcion": "Cartuchos de tinta para impresoras",
+    "unidad": "H87"
+  },
+  {
+    "clave": "43212103",
+    "descripcion": "Computadoras portátiles",
+    "unidad": "H87"
+  },
+  {
+    "clave": "43212105",
+    "descripcion": "Servidores",
+    "unidad": "H87"
+  },
+  {
+    "clave": "26111701",
+    "descripcion": "Baterías recargables",
+    "unidad": "H87"
+  },
+  {
+    "clave": "15121502",
+    "descripcion": "Gasolina",
+    "unidad": "LTR"
+  },
+  {
+    "clave": "15121501",
+    "descripcion": "Diésel",
+    "unidad": "LTR"
+  },
+  {
+    "clave": "15121806",
+    "descripcion": "Aceites para motor",
+    "unidad": "LTR"
+  },
+  {
+    "clave": "47131805",
+    "descripcion": "Detergente líquido",
+    "unidad": "LTR"
+  },
+  {
+    "clave": "47131811",
+    "descripcion": "Desinfectante en aerosol",
+    "unidad": "LTR"
+  },
+  {
+    "clave": "81141901",
+    "descripcion": "Servicios de limpieza de oficinas",
+    "unidad": "E48"
+  },
+  {
+    "clave": "72151501",
+    "descripcion": "Servicios de mantenimiento de edificios",
+    "unidad": "E48"
+  },
+  {
+    "clave": "81111812",
+    "descripcion": "Servicios de soporte técnico en TI",
+    "unidad": "E48"
+  }
+]

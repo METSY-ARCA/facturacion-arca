@@ -4,6 +4,7 @@ import os
 from datetime import datetime
 import json
 from dotenv import load_dotenv
+from registro_organizador import registrar_organizador
 
 # Cargar variables de entorno desde .env
 load_dotenv()
@@ -26,7 +27,7 @@ def proteger_endpoints():
     if request.endpoint in ["generar_factura", "previsualizar_factura"]:
         token = request.form.get("token") or request.args.get("token")
         if token != os.getenv("SECURE_TOKEN"):
-            return "\ud83d\udd12 Acceso no autorizado", 403
+            return "🔒 Acceso no autorizado", 403
 
 def crear_cliente(legal_name, tax_id, postal_code, regimen_fiscal):
     url = f"{BASE_URL}/customers"
@@ -190,6 +191,10 @@ def previsualizar_factura():
         impuestos=impuestos,
         datos_form=datos_form
     )
+
+@app.route("/registrar_organizador", methods=["POST"])
+def handle_registro_organizador():
+    return registrar_organizador()
 
 # Producción con Waitress
 if __name__ == "__main__":

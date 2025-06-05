@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Generador de Facturas Arca</title>
+  <title>Generador de Facturas METSY</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -20,9 +20,22 @@
       border-radius: 10px;
       box-shadow: 0 0 15px rgba(0,0,0,0.1);
     }
-    h1, h3 {
+    h1 {
       text-align: center;
       color: #333;
+    }
+    summary {
+      font-weight: bold;
+      font-size: 18px;
+      cursor: pointer;
+      padding: 10px;
+      background: #007bff;
+      color: white;
+      border-radius: 5px;
+      margin-top: 15px;
+    }
+    details {
+      margin-bottom: 20px;
     }
     label {
       display: block;
@@ -38,34 +51,75 @@
       box-sizing: border-box;
     }
     button {
-      background-color: #28a745;
-      color: white;
       font-size: 16px;
       cursor: pointer;
       margin-top: 20px;
     }
-    button:hover {
+    .btn-verde {
+      background-color: #28a745;
+      color: white;
+    }
+    .btn-verde:hover {
       background-color: #218838;
     }
-    .section {
-      margin-top: 30px;
-      border-top: 1px solid #eee;
-      padding-top: 20px;
+    .btn-azul {
+      background-color: #007bff;
+      color: white;
     }
-    #producto-servicio {
-      display: none;
+    .btn-azul:hover {
+      background-color: #0056b3;
+    }
+    .botones-finales {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      margin-top: 30px;
+    }
+    .producto-box {
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      padding: 15px;
+      margin-top: 15px;
+      position: relative;
+    }
+    .cerrar-producto {
+      position: absolute;
+      top: 5px;
+      right: 10px;
+      background: red;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 25px;
+      height: 25px;
+      cursor: pointer;
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <h1>Generador de Facturas Arca</h1>
-    <form action="/generar_factura" method="POST">
-	<input type="hidden" name="token" value="miclave123@arca-metsycodigopython28069241kawasaki"
-      <div class="section">
-        <h3>Comprobante</h3>
-        <label for="regimen_fiscal">Régimen Fiscal:</label>
-        <select id="regimen_fiscal" name="regimen_fiscal" required>
+    <h1>Generador de Facturas METSY</h1>
+    <form action="/generar_factura" method="POST" enctype="multipart/form-data">
+      <input type="hidden" name="token" value="miclave123@arca-metsycodigopython28069241kawasaki">
+
+      <details open>
+        <summary>📄 Datos del Comprobante</summary>
+        <label>Fecha de Emisión:</label>
+        <input type="date" name="fecha_emision" id="fecha_emision" required>
+
+        <label>Hora de Emisión:</label>
+        <input type="time" name="hora_emision" id="hora_emision" required>
+
+        <label>Tipo de Comprobante:</label>
+        <select name="tipo_cfdi" required>
+          <option value="I">Ingreso</option>
+          <option value="E">Egreso</option>
+          <option value="T">Traslado</option>
+          <option value="P">Pago</option>
+        </select>
+
+        <label>Régimen Fiscal:</label>
+        <select name="regimen_fiscal" required>
           <option value="601">General de Ley Personas Morales</option>
           <option value="603">Personas Morales con Fines no Lucrativos</option>
           <option value="605">Sueldos y Salarios e Ingresos Asimilados a Salarios</option>
@@ -75,236 +129,136 @@
           <option value="612">Personas Físicas con Actividades Empresariales y Profesionales</option>
           <option value="614">Ingresos por Dividendos (socios y accionistas)</option>
           <option value="616">Sin obligaciones fiscales</option>
-	  <option value="621">Regimen simplificado de confianza</option>
+          <option value="621">Régimen Simplificado de Confianza</option>
         </select>
 
-        <label for="forma_pago">Forma de Pago:</label>
-        <select id="forma_pago" name="forma_pago" required>
+        <label>Forma de Pago:</label>
+        <select name="forma_pago" id="forma_pago" required>
           <option value="01">Efectivo</option>
+          <option value="02">Cheque nominativo</option>
           <option value="03">Transferencia electrónica de fondos</option>
           <option value="04">Tarjeta de crédito</option>
           <option value="28">Tarjeta de débito</option>
           <option value="99">Por definir</option>
         </select>
 
-        <label for="moneda">Moneda:</label>
-        <select id="moneda" name="moneda" required>
+        <label>Método de Pago:</label>
+        <select name="metodo_pago" id="metodo_pago" required>
+          <option value="PUE">Pago en una sola exhibición</option>
+          <option value="PPD">Pago en parcialidades o diferido</option>
+        </select>
+
+        <label>Moneda:</label>
+        <select name="moneda" required>
           <option value="MXN">Peso Mexicano</option>
           <option value="USD">Dólar Americano</option>
           <option value="EUR">Euro</option>
         </select>
 
-        <label for="tipo_cambio">Tipo de Cambio:</label>
-        <input type="number" step="0.0001" id="tipo_cambio" name="tipo_cambio" value="1.0000" required>
-      </div>
+        <label>Tipo de Cambio:</label>
+        <input type="number" step="0.0001" name="tipo_cambio" value="1.0000" required>
 
-      <div class="section">
-        <h3>Datos del Cliente</h3>
-        <label for="legal_name">Nombre o Razón Social:</label>
-        <input type="text" id="legal_name" name="legal_name" required>
-
-        <label for="tax_id">RFC:</label>
-        <input type="text" id="tax_id" name="tax_id" required>
-
-        <label for="postal_code">Código Postal:</label>
-        <input type="text" id="postal_code" name="postal_code" required>
-
-        <label for="cfdi_use">Uso del CFDI:</label>
-        <select id="cfdi_use" name="cfdi_use" required>
-          <option value="G01">1 - Adquisición de mercancías</option>
-          <option value="G03">2 - Gastos en general</option>
+        <label>Uso del CFDI:</label>
+        <select name="cfdi_use" required>
+          <option value="G01">Adquisición de mercancías</option>
+          <option value="G02">Devoluciones, descuentos o bonificaciones</option>
+          <option value="G03">Gastos en general</option>
+          <option value="I01">Construcciones</option>
+          <option value="I02">Mobilario y equipo de oficina por inversiones</option>
+          <option value="I03">Equipo de transporte</option>
+          <option value="I04">Equipo de cómputo y accesorios</option>
+          <option value="I05">Dados, troqueles, moldes, matrices y herramental</option>
+          <option value="I06">Comunicaciones telefónicas</option>
+          <option value="I07">Comunicaciones satelitales</option>
+          <option value="I08">Otra maquinaria y equipo</option>
+          <option value="D01">Honorarios médicos, dentales y gastos hospitalarios</option>
+          <option value="D02">Gastos médicos por incapacidad o discapacidad</option>
+          <option value="D03">Gastos funerales</option>
+          <option value="D04">Donativos</option>
+          <option value="D05">Intereses reales efectivamente pagados por créditos hipotecarios</option>
+          <option value="D06">Aportaciones voluntarias al SAR</option>
+          <option value="D07">Primas por seguros de gastos médicos</option>
+          <option value="D08">Gastos de transportación escolar obligatoria</option>
+          <option value="D09">Depósitos en cuentas para el ahorro, primas que tengan como base planes de pensiones</option>
+          <option value="D10">Pagos por servicios educativos (colegiaturas)</option>
           <option value="P01">Por definir</option>
         </select>
+      </details>
+
+      <details>
+        <summary>📟 Productos o Servicios</summary>
+        <div id="productos-container"></div>
+        <button type="button" onclick="agregarProducto()">Agregar Producto</button>
+      </details>
+
+      <form action="/registrar_organizador" method="POST" enctype="multipart/form-data">
+        <details>
+          <summary>🏢 Registro de Nuevo Organizador (RFC)</summary>
+          <label>Nombre o Razón Social:</label>
+          <input type="text" name="org_razon_social" required>
+
+          <label>RFC:</label>
+          <input type="text" name="org_rfc" required>
+
+          <label>Archivo .cer:</label>
+          <input type="file" name="archivo_cer" accept=".cer" required>
+
+          <label>Archivo .key:</label>
+          <input type="file" name="archivo_key" accept=".key" required>
+
+          <label>Contraseña de la clave privada:</label>
+          <input type="password" name="org_contrasena" required>
+
+          <button type="submit" class="btn-verde">Registrar Organizador</button>
+        </details>
+      </form>
+
+      <div class="botones-finales">
+        <button type="submit" class="btn-verde">Generar Factura</button>
+        <button type="submit" class="btn-azul" formaction="/previsualizar_factura">Previsualizar</button>
       </div>
-
-      <div class="section">
-        <h3>Datos de la Factura</h3>
-        <label for="tipo_cfdi">Tipo de Comprobante:</label>
-        <select id="tipo_cfdi" name="tipo_cfdi" required>
-          <option value="I">Ingreso</option>
-          <option value="E">Egreso</option>
-          <option value="T">Traslado</option>
-          <option value="P">Pago</option>
-        </select>
-
-        <label for="fecha_emision">Fecha:</label>
-        <input type="date" id="fecha_emision" name="fecha_emision" required>
-
-        <label for="hora_emision">Hora:</label>
-        <input type="time" id="hora_emision" name="hora_emision" required>
-      </div>
-
-      <div class="section">
-        <h3>Producto o Servicio</h3>
-        <button type="button" onclick="toggleProducto()">Agregar Producto o Servicio</button>
-
-        <div id="producto-servicio">
-          <label for="description">Descripción:</label>
-          <input type="text" id="description" name="description">
-
-          <label for="price">Precio Unitario:</label>
-          <input type="number" step="0.01" id="price" name="price">
-
-          <label for="quantity">Cantidad:</label>
-          <input type="number" id="quantity" name="quantity">
-
-          <input type="hidden" id="agregar_producto" name="agregar_producto" value="">
-        </div>
-      </div>
-
-	<div class="section">
-  <h3>Impuestos</h3>
-  <button type="button" onclick="toggleImpuestos()">Agregar Impuestos</button>
-
-  <div id="impuestos-section" style="display: none; margin-top: 15px;">
-    <!-- IVA -->
-    <label><input type="checkbox" id="iva_check" name="usar_iva" onchange="toggleImpuestoCampos('iva')"> IVA</label>
-    <div id="iva_fields" style="display:none; margin-left: 20px;">
-      <label for="iva_tipo">Tipo IVA:</label>
-      <select id="iva_tipo" name="iva_tipo" onchange="cargarTasas('iva')">
-        <option value="">Seleccionar</option>
-        <option value="trasladado">Trasladado</option>
-        <option value="retenido">Retenido</option>
-        <option value="exento">Exento</option>
-      </select>
-      <label for="iva_tasa_select">Tasa predeterminada:</label>
-      <select id="iva_tasa_select" onchange="asignarTasa('iva')"></select>
-      <label for="iva_tasa">Otra tasa (%):</label>
-      <input type="number" name="iva_tasa" id="iva_tasa" step="0.01">
-    </div>
-
-    <!-- ISR -->
-    <label><input type="checkbox" id="isr_check" name="usar_isr" onchange="toggleImpuestoCampos('isr')"> ISR</label>
-    <div id="isr_fields" style="display:none; margin-left: 20px;">
-      <label for="isr_tipo">Tipo ISR:</label>
-      <select id="isr_tipo" name="isr_tipo" onchange="cargarTasas('isr')">
-        <option value="retenido">Retenido</option>
-      </select>
-      <label for="isr_tasa_select">Tasa predeterminada:</label>
-      <select id="isr_tasa_select" onchange="asignarTasa('isr')">
-        <option value="">Seleccionar</option>
-        <option value="10">10%</option>
-        <option value="1.25">1.25%</option>
-      </select>
-      <label for="isr_tasa">Otra tasa (%):</label>
-      <input type="number" name="isr_tasa" id="isr_tasa" step="0.01">
-    </div>
-
-    <!-- IEPS -->
-    <label><input type="checkbox" id="ieps_check" name="usar_ieps" onchange="toggleImpuestoCampos('ieps')"> IEPS</label>
-    <div id="ieps_fields" style="display:none; margin-left: 20px;">
-      <label for="ieps_tipo">Tipo IEPS:</label>
-      <select id="ieps_tipo" name="ieps_tipo" onchange="cargarTasas('ieps')">
-        <option value="">Seleccionar</option>
-        <option value="tasa">Tasa</option>
-        <option value="cuota">Cuota</option>
-      </select>
-      <label for="ieps_tasa_select">Tasa predeterminada:</label>
-      <select id="ieps_tasa_select" onchange="asignarTasa('ieps')"></select>
-      <label for="ieps_tasa">Otra tasa (% o cuota):</label>
-      <input type="number" name="ieps_tasa" id="ieps_tasa" step="0.01">
-    </div>
-  </div>
-</div>
-
-
-	<button type="submit">Generar Factura</button>
-	<button type="submit" formaction="/previsualizar_factura" formtarget="_blank" style="background-color: #007bff;">Previsualizar Factura</button>
-
     </form>
   </div>
 
   <script>
-    window.onload = function() {
+    function agregarProducto() {
+      const container = document.getElementById("productos-container");
+      const div = document.createElement("div");
+      div.className = "producto-box";
+      div.innerHTML = `
+        <button type="button" class="cerrar-producto" onclick="this.parentElement.remove()">&times;</button>
+        <label>Descripción:</label>
+        <input type="text" name="descripcion[]" required>
+
+        <label>Cantidad:</label>
+        <input type="number" name="cantidad[]" step="1" required>
+
+        <label>Precio Unitario:</label>
+        <input type="number" name="precio_unitario[]" step="0.01" required>
+      `;
+      container.appendChild(div);
+    }
+
+    window.addEventListener("DOMContentLoaded", () => {
       const now = new Date();
-      const fecha = now.toISOString().split('T')[0];
-      const hora = now.toTimeString().split(":");
-      const hora_formateada = hora[0] + ":" + hora[1];
+      const fecha = now.toISOString().split("T")[0];
+      const hora = now.toTimeString().slice(0,5);
 
-      document.getElementById('fecha_emision').value = fecha;
-      document.getElementById('hora_emision').value = hora_formateada;
-    };
+      const fechaInput = document.getElementById("fecha_emision");
+      const horaInput = document.getElementById("hora_emision");
+      if (fechaInput) fechaInput.value = fecha;
+      if (horaInput) horaInput.value = hora;
 
-    function toggleProducto() {
-      const seccion = document.getElementById("producto-servicio");
-      const hiddenInput = document.getElementById("agregar_producto");
-      if (seccion.style.display === "none") {
-        seccion.style.display = "block";
-        hiddenInput.value = "1";
-        document.getElementById("description").required = true;
-        document.getElementById("price").required = true;
-        document.getElementById("quantity").required = true;
-      } else {
-        seccion.style.display = "none";
-        hiddenInput.value = "";
-        document.getElementById("description").required = false;
-        document.getElementById("price").required = false;
-        document.getElementById("quantity").required = false;
+      const formaPago = document.getElementById("forma_pago");
+      const metodoPago = document.getElementById("metodo_pago");
+      if (formaPago && metodoPago) {
+        formaPago.addEventListener("change", function () {
+          if (this.value === "99") {
+            metodoPago.value = "PPD";
+          }
+        });
       }
-    }
-
-    function toggleImpuestos() {
-      const div = document.getElementById("impuestos-section");
-      div.style.display = div.style.display === "none" ? "block" : "none";
-    }
-
-    function toggleImpuestoCampos(impuesto) {
-      const fieldDiv = document.getElementById(impuesto + "_fields");
-      const checkbox = document.getElementById(impuesto + "_check");
-      fieldDiv.style.display = checkbox.checked ? "block" : "none";
-    }
+    });
   </script>
-
-<script>
-  function toggleImpuestos() {
-    const div = document.getElementById("impuestos-section");
-    div.style.display = div.style.display === "none" ? "block" : "none";
-  }
-
-  function toggleImpuestoCampos(impuesto) {
-    const fieldDiv = document.getElementById(impuesto + "_fields");
-    const checkbox = document.getElementById(impuesto + "_check");
-    fieldDiv.style.display = checkbox.checked ? "block" : "none";
-  }
-
-  function cargarTasas(impuesto) {
-    const tipo = document.getElementById(impuesto + "_tipo").value;
-    const select = document.getElementById(impuesto + "_tasa_select");
-    select.innerHTML = "";
-
-    const opciones = {
-      iva: {
-        trasladado: ["16", "8"],
-        retenido: ["10.667", "6"],
-        exento: []
-      },
-      isr: {
-        retenido: ["10", "1.25"]
-      },
-      ieps: {
-        tasa: ["26.5", "30"],
-        cuota: ["0.498", "0.303"]
-      }
-    };
-
-    if (opciones[impuesto] && opciones[impuesto][tipo]) {
-      opciones[impuesto][tipo].forEach(tasa => {
-        const opt = document.createElement("option");
-        opt.value = tasa;
-        opt.text = tasa + "%";
-        select.appendChild(opt);
-      });
-    }
-  }
-
-  function asignarTasa(impuesto) {
-    const select = document.getElementById(impuesto + "_tasa_select");
-    const input = document.getElementById(impuesto + "_tasa");
-    input.value = select.value;
-  }
-</script>
-
 </body>
 </html>
-
-
